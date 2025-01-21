@@ -1,5 +1,6 @@
 version: '3.8'
 services:
+# Kafka
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
@@ -11,3 +12,71 @@ services:
     environment:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+
+# 주문 서비스
+  order-service:
+    build:
+      context: ./order-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - order-mysql-db
+    networks:
+      - backend
+    platform: linux/amd64
+  order-mysql-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: order!2#
+      MYSQL_DATABSE: order
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+      -
+# 결제 서비스
+  payment-service:
+    build:
+      context: ./payment-service
+    ports:
+      - "8082:8081"
+    depends_on:
+      - payment-mysql-db
+    networks:
+      - backend
+    platform: linux/amd64
+  payment-mysql-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: payment!2#
+      MYSQL_DATABSE: payment
+    ports:
+      - "3307:3306"
+    networks:
+      - backend
+
+# 배송 서비스
+  delivery-service:
+    build:
+      context: ./delivery-service
+    ports:
+      - "8083:8081"
+    depends_on:
+      - delivery-mysql-db
+    networks:
+      - backend
+    platform: linux/amd64
+  delivery-mysql-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: delivery!2#
+      MYSQL_DATABSE: delivery
+    ports:
+      - "3308:3306"
+    networks:
+      - backend
+
+#Docker 네트워크 설정
+networks:
+  backend:
+    driver: bridge
