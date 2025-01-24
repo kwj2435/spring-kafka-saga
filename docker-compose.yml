@@ -18,7 +18,7 @@ services:
     build:
       context: ./order-service
     ports:
-      - "8081:8081"
+      - "8081:8080"
     depends_on:
       - order-mysql-db
     networks:
@@ -28,18 +28,20 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: order!2#
-      MYSQL_DATABSE: order
+      MYSQL_DATABASE: order
     ports:
       - "3306:3306"
     networks:
       - backend
-      -
+    volumes:
+      - ./init/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+
 # 결제 서비스
   payment-service:
     build:
       context: ./payment-service
     ports:
-      - "8082:8081"
+      - "8082:8080"
     depends_on:
       - payment-mysql-db
     networks:
@@ -49,32 +51,36 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: payment!2#
-      MYSQL_DATABSE: payment
+      MYSQL_DATABASE: payment
     ports:
       - "3307:3306"
     networks:
       - backend
+    volumes:
+      - ./init/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
 
-# 배송 서비스
-  delivery-service:
+# 재고 서비스
+  inventory-service:
     build:
-      context: ./delivery-service
+      context: ./inventory-service
     ports:
-      - "8083:8081"
+      - "8083:8080"
     depends_on:
-      - delivery-mysql-db
+      - inventory-mysql-db
     networks:
       - backend
     platform: linux/amd64
-  delivery-mysql-db:
+  inventory-mysql-db:
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: delivery!2#
-      MYSQL_DATABSE: delivery
+      MYSQL_ROOT_PASSWORD: inventory!2#
+      MYSQL_DATABASE: inventory
     ports:
       - "3308:3306"
     networks:
       - backend
+    volumes:
+      - ./init/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
 
 #Docker 네트워크 설정
 networks:

@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY build/libs/*.jar order-service.jar
   
-EXPOSE 8081
+EXPOSE 8080
   
 ENTRYPOINT ["java", "-jar", "order-service.jar"]
