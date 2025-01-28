@@ -1,5 +1,7 @@
-!/bin/bash
+#!/bin/bash
 
-bash ./allModuleBuild.sh
+echo "each module build start ..."
+bash ./init/allModuleBuild.sh
 
-docker-compose up -do
+echo "docker-compose up ..."
+docker-compose up -d
