@@ -35,6 +35,7 @@ services:
       - backend
     volumes:
       - ./init/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - ./init/order.sql:/docker-entrypoint-initdb.d/order.sql
 
 # 결제 서비스
   payment-service:
@@ -58,6 +59,7 @@ services:
       - backend
     volumes:
       - ./init/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - ./init/payment.sql:/docker-entrypoint-initdb.d/payment.sql
 
 # 재고 서비스
   inventory-service:
@@ -81,6 +83,7 @@ services:
       - backend
     volumes:
       - ./init/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - ./init/inventory.sql:/docker-entrypoint-initdb.d/inventory.sql
 
 #Docker 네트워크 설정
 networks:
