@@ -24,11 +24,15 @@ repositories {
 }
 
 dependencies {
+    implementation project(':common-service')
+
     runtimeOnly 'com.mysql:mysql-connector-j'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
+
+tasks.register("prepareKotlinBuildScriptModel"){}
 
 tasks.named('test') {
     useJUnitPlatform()

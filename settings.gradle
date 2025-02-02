@@ -1,6 +1,6 @@
 rootProject.name = 'spring-kafka-saga'
 
-include 'common-service'
+include ':common-service'
 include 'order-service'
 include 'payment-service'
 include 'inventory-service'
