@@ -11,6 +11,11 @@ public class CommonKafkaProducer {
   private final KafkaTemplate<String, String> kafkaTemplate;
 
   public void sendMessage(String topic, String message) {
-    kafkaTemplate.send(topic, message);
+    try {
+      kafkaTemplate.send(topic, message);
+      System.out.println("Sent message:" + message);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 }
