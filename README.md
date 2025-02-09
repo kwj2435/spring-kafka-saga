@@ -6,13 +6,20 @@
 https://turtledev.tistory.com/73
 
 ---
+
+### 실행 방법
+docker가 실행된 상태에서, oot 디렉토리에서 아래 명령어 실행
+~~~
+./start.sh
+~~~
+---
 ### 기술 스택
 - Spring Boot 3.4.1
 - Spring Data JPA
 - Java 17
 - Kafka
 - MySql 8.0
-
+---
 ### 주요 구현 사항
 1. 주문, 재고, 결제 모듈별 기능 구현
 2. SAGA 패턴(Choreography) 기반 모듈간 이벤트 처리 및 보상 트랜잭션 처리
@@ -34,12 +41,6 @@ https://turtledev.tistory.com/73
 - 결제 모듈은 결제 요청 토픽에 발행된 이벤트를 확인하여, 결제 처리 
 - 결제 성공 -> 주문 모듈과 재고 모듈에 결제 성공 이벤트를 발행하여 주문 상태 변경(APPROVED)와 재고 임시 차감을 확정  
 - 결제 실패 -> 주문 모듈과 재고 모듈에 결제 실패 이벤트를 발행하여 주문 요청을 취소하고, 재고 임시 차감을 롤백  
-
-### 실행 방법
-docker가 실행된 상태에서, oot 디렉토리에서 아래 명령어 실행
-~~~
-./start.sh
-~~~
-
+---
 ### 인프라 구성
 ![Image](https://github.com/user-attachments/assets/29348fa3-eca6-4b89-af28-b191c7b31553)
