@@ -8,7 +8,7 @@ https://turtledev.tistory.com/73
 ---
 
 ### 실행 방법
-docker가 실행된 상태에서, oot 디렉토리에서 아래 명령어 실행
+docker가 실행된 상태에서, root 디렉토리에서 아래 명령어 실행
 ~~~
 ./start.sh
 ~~~
