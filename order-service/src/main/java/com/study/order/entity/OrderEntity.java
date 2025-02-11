@@ -49,7 +49,7 @@ public class OrderEntity {
   // 주문 업데이트일
   private LocalDateTime updatedAt;
 
-  @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<OrderItemEntity> orderItemEntityList;
 
   @PrePersist

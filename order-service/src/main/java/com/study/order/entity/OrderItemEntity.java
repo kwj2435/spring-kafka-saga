@@ -39,10 +39,10 @@ public class OrderItemEntity {
   private int quantity;  // 주문 수량
 
   @Column(nullable = false)
-  private int price;  // 상품 단가
+  private int price;
 
   @Column(nullable = false, name = "total_price")
-  private int totalPrice;  // 총 가격 (quantity * price)
+  private int totalPrice;
 
   @Column(name = "created_at", updatable = false)
   private LocalDateTime createdAt = LocalDateTime.now();  // 생성 일시
