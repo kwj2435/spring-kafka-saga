@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 echo "each module build start ..."
 bash ./init/allModuleBuild.sh
