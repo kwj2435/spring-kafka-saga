@@ -25,14 +25,14 @@ import lombok.NoArgsConstructor;
 public class OrderItemEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "order_item_id")
+  @Column(name = "ORDER_ITEM_ID")
   private Long orderItemId;  // 주문 항목 ID
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "order_id", nullable = false)
+  @JoinColumn(name = "ORDER_ID", nullable = false)
   private OrderEntity orderEntity;
 
-  @Column(nullable = false)
+  @Column(name = "PRODUCT_ID", nullable = false)
   private long productId;
 
   @Column(nullable = false)
@@ -41,13 +41,13 @@ public class OrderItemEntity {
   @Column(nullable = false)
   private int price;
 
-  @Column(nullable = false, name = "total_price")
+  @Column(name = "TOTAL_PRICE", nullable = false)
   private int totalPrice;
 
-  @Column(name = "created_at", updatable = false)
+  @Column(name = "CREATED_AT", updatable = false)
   private LocalDateTime createdAt = LocalDateTime.now();  // 생성 일시
 
-  @Column(name = "updated_at")
+  @Column(name = "UPDATED_AT")
   private LocalDateTime updatedAt = LocalDateTime.now();  // 수정 일시
 
   public static OrderItemEntity createOrderItem(OrderEntity orderEntity, OrderItem orderItem) {
